@@ -1,11 +1,11 @@
-		global	strlen:function
-strlen:
-	mov		rcx, 1		;counter
+		global	my_strlen:function
+my_strlen:
+	mov		rax, 0		;counter
 
 strlen_while:
-	cmp		BYTE [rdi + rcx], sil
+	cmp		BYTE [rdi + rax], 0
 	jz		strlen_end
-	inc		rcx			;increment rcx
+	inc		rax			;increment rcx
 	jmp		strlen_while
 
 strlen_end:
