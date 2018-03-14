@@ -7,11 +7,11 @@
 
 NAME	=	libasm.so
 
-CC	=	gcc
+CC		=	gcc
 
-ASM	=	nasm
+ASM		=	nasm
 
-ASFLAGS	=	-f elf64
+ASFLAGS	=	-Wall -f elf64
 
 CFLAGS	=	-fPIC -shared
 
@@ -22,7 +22,7 @@ OBJS	=	$(SRCS:.asm=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(LD) $(CFLAGS) $^ -o $(NAME)
+	$(CC) $(CFLAGS) $^ -o $(NAME)
 
 %.o: %.asm
 	$(ASM) $(ASFLAGS) $< -o $@

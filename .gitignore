@@ -1,5 +1,8 @@
 cmake-build-debug/
 CMakeLists.txt
+
+test/
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Example user template template
 ### Example user template
