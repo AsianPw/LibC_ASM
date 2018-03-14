@@ -1,5 +1,5 @@
-		global	my_strlen:function
-my_strlen:
+		global	strlen:function
+strlen:
 	mov		rax, 0		;counter
 
 strlen_while:
