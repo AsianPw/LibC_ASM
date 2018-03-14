@@ -7,7 +7,7 @@
 
 NAME	=	libasm.so
 
-CC		=	gcc
+CC		=	ld
 
 ASM		=	nasm
 
