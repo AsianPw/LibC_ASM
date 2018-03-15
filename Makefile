@@ -21,6 +21,7 @@ SRCS_TEST	=	./test/strlen_test.c	\
 
 SRCS		=	./src/strlen.asm	\
 				./src/strchr.asm	\
+				./src/memset.asm	\
 
 LDFLAGS_TEST	=	-L. -lasm -lcriterion
 

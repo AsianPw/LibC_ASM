@@ -4,15 +4,14 @@ SECTION	.text
 
 strchr:
 	ENTER	0, 0
-	PUSH	RDI
 
-	loop_f:
+	loop:
 		CMP		BYTE[RDI], 0
 		JZ		not_found
-		CMP		BYTE[RDI], sil
+		CMP		BYTE[RDI], SIL	; Compare current byte of RDI with SIL
 		JZ		set_value
 		INC		RDI
-		JMP		loop_f
+		JMP		loop
 
 	not_found:
 		MOV		RAX, 0
@@ -23,6 +22,5 @@ strchr:
 		JMP		end
 
 	end:
-		POP		RDI
 		LEAVE
 		RET
