@@ -8,11 +8,9 @@ memcpy:
 	loop:
 		CMP		RDX, RCX
 		JZ		end
-		MOV		R8B, BYTE[RSI]
-		MOV		BYTE[RDI], R8B
+		MOV		R8B, BYTE[RSI + RCX]
+		MOV		BYTE[RDI + RCX], R8B
 		INC		RCX
-		INC		RSI
-		INC		RDI
 		JMP		loop
 
 	end:
