@@ -4,7 +4,7 @@ SECTION	.text
 
 strlen:
 	ENTER	0, 0
-	MOV		RCX, 0			; counter
+	MOV		RCX, 0			; counter rcx =0
 
 	strlen_while:
 		CMP		BYTE[RDI], 0
