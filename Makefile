@@ -13,13 +13,14 @@ CC		=	gcc
 
 ASM		=	nasm
 
-ASFLAGS	=	-Wall -f elf64
+ASMFLAGS	=	-Wall -f elf64
 
 CFLAGS	=	-fPIC -shared
 
 SRCS_TEST	=	./test/strlen_test.c	\
 
 SRCS	=	./src/strlen.asm	\
+			./src/strchr.asm	\
 
 LDFLAGS_TEST	=	-lcriterion -L. -lasm
 
@@ -33,18 +34,28 @@ $(NAME): $(OBJS)
 	$(LD) $(CFLAGS) $^ -o $(NAME)
 
 %.o: %.asm
-	$(ASM) $(ASFLAGS) $< -o $@
+	@printf "[\033[0;32mcompiled\033[0m] % 29s\n" $< | tr ' ' '.'
+	$(ASM) -o $@ $< $(ASMFLAGS)
+
+generate_coverage: tests_run
+	@lcov --directory . -c -o rapport.info
+	@genhtml -o ../rapport -t "Coverage of tests" rapport.info
 
 tests_run: $(NAME) $(OBJS_TEST)
-	$(CC) $(OBJS_TEST) $(LDFLAGS_TEST) -o $(NAME_TEST)
+	$(CC) $(SRCS_TEST) --coverage $(LDFLAGS_TEST) -o $(NAME_TEST)
 	./unit_test -j1 --always-succeed
 
 clean:
-	$(RM) $(OBJS)
+	@printf "[\033[0;32mRemoved\033[0m] % 29s\n" "*.gcda && *.gcno" | tr ' ' '.'
+	@find -name "*.gcda" -delete -o -name "*.gcno" -delete
+	@printf "[\033[0;32mRemoved\033[0m] % 29s\n" $(OBJS_TEST) | tr ' ' '.'
+	@$(RM) $(OBJS_TEST)
+	@printf "[\033[0;32mRemoved\033[0m] % 29s\n" $(OBJS) | tr ' ' '.'
+	@$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME_TEST)
-	$(RM) $(NAME)
+	@$(RM) $(NAME_TEST)
+	@$(RM) $(NAME)
 
 re: fclean all
 

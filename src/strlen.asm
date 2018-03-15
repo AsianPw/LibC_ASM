@@ -1,12 +1,20 @@
-		global	strlen:function
+GLOBAL	strlen
+
+SECTION	.text
+
 strlen:
-	mov		rax, 0		;counter
+	PUSH	RBP					;Prologue
+	MOV		RBP, RSI
+	MOV		RCX, 0		;counter
 
 strlen_while:
-	cmp		BYTE [rdi + rax], 0
-	jz		strlen_end
-	inc		rax			;increment rcx
-	jmp		strlen_while
+	CMP		RDI, 0
+	JZ		strlen_end
+	INC		RCX			;increment rcx
+	INC		RDI
+	JMP		strlen_while
 
 strlen_end:
-	ret
+	MOV		RAX, RCX
+	LEAVE
+	RET
