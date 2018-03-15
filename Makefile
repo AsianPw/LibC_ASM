@@ -5,28 +5,28 @@
 ## Makefile for MiniLibC
 ##
 
-NAME	=	libasm.so
+NAME		=	libasm.so
 
 NAME_TEST	=	unit_test
 
-CC		=	gcc
+CC			=	gcc
 
-ASM		=	nasm
+ASM			=	nasm
 
 ASMFLAGS	=	-Wall -f elf64
 
-CFLAGS	=	-fPIC -shared
+CFLAGS		=	-fPIC -shared
 
 SRCS_TEST	=	./test/strlen_test.c	\
 
-SRCS	=	./src/strlen.asm	\
-			./src/strchr.asm	\
+SRCS		=	./src/strlen.asm	\
+				./src/strchr.asm	\
 
-LDFLAGS_TEST	=	-lcriterion -L. -lasm
+LDFLAGS_TEST	=	-L. -lasm -lcriterion
 
 OBJS_TEST	=	$(SRCS_TEST:.c=.o)
 
-OBJS	=	$(SRCS:.asm=.o)
+OBJS		=	$(SRCS:.asm=.o)
 
 all: $(NAME)
 
@@ -42,7 +42,7 @@ generate_coverage: tests_run
 	@genhtml -o ../rapport -t "Coverage of tests" rapport.info
 
 tests_run: $(NAME) $(OBJS_TEST)
-	$(CC) $(SRCS_TEST) --coverage $(LDFLAGS_TEST) -o $(NAME_TEST)
+	$(CC) $(SRCS_TEST) --coverage -o $(NAME_TEST) $(LDFLAGS_TEST)
 	./unit_test -j1 --always-succeed
 
 clean:

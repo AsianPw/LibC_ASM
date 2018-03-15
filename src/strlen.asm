@@ -1,20 +1,19 @@
-GLOBAL	strlen
+GLOBAL	strlen:function
 
 SECTION	.text
 
 strlen:
-	PUSH	RBP					;Prologue
-	MOV		RBP, RSI
-	MOV		RCX, 0		;counter
+	ENTER	0, 0
+	MOV		RCX, 0			; counter
 
-strlen_while:
-	CMP		RDI, 0
-	JZ		strlen_end
-	INC		RCX			;increment rcx
-	INC		RDI
-	JMP		strlen_while
+	strlen_while:
+		CMP		BYTE[RDI], 0
+		JZ		end
+		INC		RCX			; increment rcx
+		INC		RDI			; next char
+		JMP		strlen_while
 
-strlen_end:
-	MOV		RAX, RCX
-	LEAVE
-	RET
+	end:
+		MOV		RAX, RCX	; pass counter to ret value
+		LEAVE
+		RET
