@@ -1,8 +1,8 @@
-GLOBAL	my_strcmp
+GLOBAL	strcmp
 
 SECTION	.text
 
-my_strcmp:
+strcmp:
 	ENTER	0, 0
 	MOV		RCX, 0
 
