@@ -25,6 +25,7 @@ SRCS		=	./src/strlen.asm	\
 				./src/memcopy.asm	\
 				./src/strcmp.asm	\
 				./src/memmove.asm	\
+				./src/rindex.asm	\
 
 LDFLAGS_TEST	=	-L. -lasm -lcriterion
 
