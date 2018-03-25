@@ -1,8 +1,8 @@
-GLOBAL	my_rindex:function
+GLOBAL	rindex:function
 
 SECTION	.text
 
-my_rindex:
+rindex:
 	ENTER	0, 0
 	MOV		RAX, 0
 
